@@ -32,7 +32,7 @@ def decide(score):
 
 def write2File(score):
     with open('scoreFile.txt', 'a') as f:
-        f.write('Run score: ' + repr(score) + ' points\n')
+        f.write('\nRun score: ' + repr(score) + ' points\n')
         f.close()
 
 def dieSelection(stage):

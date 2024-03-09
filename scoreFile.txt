@@ -1,9 +1,2 @@
----------------------------------------------------------------------------
-Kaylee's High Scores *with stage adding flat bonus; no score saving by level*
+
 Run score: 120 points
-Run score: 215 points
-Run score: 304 points
----------------------------------------------------------------------------
-Adam's High Scores *with stage adding flat bonus; no score saving by level*
-Run score: 305 points
----------------------------------------------------------------------------
