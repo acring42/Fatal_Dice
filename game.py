@@ -34,7 +34,7 @@ def rollDie(score, stage):
     dieChoice_Value, dieChoice_name  = dieSelection(stage)
     dice1 = random.choice(dieChoice_Value)
     dice2 = random.choice(dieChoice_Value)
-    print('Current Dice Set -> ', dieChoice_name)
+    print('Current Dice Set --> ', dieChoice_name,' <--')
     print('\nDice Number 1 : ',dice1)
     print('Dice Number 2 : ',dice2)
     if (dice1 == 1 or dice2 == 1):
@@ -46,8 +46,15 @@ def rollDie(score, stage):
         return score
     
 def decide(score):
-    keepPlaying = input('\nTest Your Luck?\nPress 1 to continue\nPress 2 if you are a quitter\nEnter here: ')
-    if keepPlaying == '2':
+    while True:
+        try:
+            keepPlaying = int(input('\nTest Your Luck?\nPress 1 to continue\nPress 2 if you are a quitter\nEnter here: '))
+            if keepPlaying>2 or keepPlaying<1:
+                raise ValueError
+            break
+        except ValueError:
+            print("Invalid response. Please select 1 or 2!")
+    if keepPlaying == 2:
         print("\nYour final score is ", score)
         write2File(score)
         score = -1
@@ -74,23 +81,35 @@ def dieSelection(stage):
 def main():
     score = 0
     stage = 1
-    playAgain = '1'
-    startVar = '1'
+    playAgain = 1
 
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear') #clears terminal on start/restart
     print('------------------------------------\nWelcome to the Game! Be Careful to Not Let Greed Consume You!\n')
-    startVar = input('Press 1 to Roll the Dice or Press 2 to Quit Out\nEnter Here: ')
+    while True:
+        try:
+            startVar = int(input('Press 1 to Roll the Dice or Press 2 to Quit Out\nEnter Here: '))
+            if startVar>2 or startVar<1:
+                raise ValueError
+            break
+        except ValueError:
+            print("Invalid response. Please select 1 or 2!")
     print('------------------------------------')
 
-    while score != -1 and playAgain == '1' and startVar == '1':
+    while score != -1 and playAgain == 1 and startVar == 1:
         print('\n\nStage ', stage, ': Roll the Die or... die')
         print('------------------------------------')
         score = rollDie(score, stage)
         if score == -1:
-            playAgain = input('\nPlay Again?\nPress 1 to retry\nPress 2 to quit\n')
-            if playAgain == '1':
-                score = 0
-                stage = 1
+            while True:
+                try:
+                    playAgain = int(input('\nPlay Again?\nPress 1 to retry\nPress 2 to quit\n'))
+                    if playAgain>2 or playAgain<1:
+                        raise ValueError
+                    break
+                except ValueError:
+                    print("Invalid response. Please select 1 or 2!")
+            if playAgain == 1:
+                main()
             else:
                 print("\nGame over\n\n")
                 break
