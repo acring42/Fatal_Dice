@@ -3,7 +3,15 @@ Kaylee's High Scores *with stage adding flat bonus; no score saving by level*
 Run score: 120 points
 Run score: 215 points
 Run score: 304 points
+Run score: 394 points
+Run score: 407 points
 ---------------------------------------------------------------------------
 Adam's High Scores *with stage adding flat bonus; no score saving by level*
 Run score: 305 points
+Run score: 333 points
 ---------------------------------------------------------------------------
+Grandaddy's High Scores *with stage adding flat bonus; no score saving by level*
+Run score: 323 points
+---------------------------------------------------------------------------
+Kaleb's High Scores *with stage adding flat bonus; no score saving by level*
+Run score: 370 points
