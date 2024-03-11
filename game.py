@@ -72,7 +72,7 @@ def dieSelection(stage):
     elif stage<=7 and stage>=5:
         return d12.value, d12.name
     elif stage<=10 and stage>=8:
-        return d10.value, d12.name
+        return d10.value, d10.name
     elif stage<=13 and stage>=11:
         return d8.value, d8.name
     else:
