@@ -1,16 +1,10 @@
-import random
-import os
-#from tkinter import *
-
-#window = Tk() #instantiate an instance of a window
-#window.geometry("360x360")
-#window.title("Gold River 2.0")
-
-#window.config(background="#181818")
+import random #used for generating random numbers
+import os #used for clearing terminal after selecting "play again"
+import re # regular expression
 
 class dice:
     name = ""
-    values = []
+    value = []
 
 d6 = dice()
 d6.name = 'D6'
@@ -62,9 +56,30 @@ def decide(score):
     return score
 
 def write2File(score):
+    highScore = readHighScore()
+    if score > highScore:
+        with open('scoreFile.txt', 'r+') as r:
+            lines = r.readlines()
+            lines[0] = f'Highscore: {score} points\n'
+            r.seek(0)
+            r.writelines(lines)
+            r.truncate()
+
     with open('scoreFile.txt', 'a') as f:
         f.write('\nRun score: ' + repr(score) + ' points\n')
-        f.close()
+
+def readHighScore():
+    try:
+        with open('scoreFile.txt', 'r') as file:
+            highScore = file.readline()
+            highScoreMatch = re.search(r'\d+', highScore)
+            if highScoreMatch:
+                highScore = int(highScoreMatch.group())
+            else:
+                highScore = 0
+            return highScore
+    except FileNotFoundError:
+        return 0
 
 def dieSelection(stage):
     if stage<=4:
@@ -88,7 +103,7 @@ def main():
     while True:
         try:
             startVar = int(input('Press 1 to Roll the Dice or Press 2 to Quit Out\nEnter Here: '))
-            if startVar>2 or startVar<1:
+            if startVar not in [1,2]:
                 raise ValueError
             break
         except ValueError:
@@ -103,7 +118,7 @@ def main():
             while True:
                 try:
                     playAgain = int(input('\nPlay Again?\nPress 1 to retry\nPress 2 to quit\n'))
-                    if playAgain>2 or playAgain<1:
+                    if playAgain not in [1,2]:
                         raise ValueError
                     break
                 except ValueError:
