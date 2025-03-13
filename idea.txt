@@ -1,0 +1,6 @@
+- add a previous round scores
+    - add a button that takes you a page that shows the rolls of each round
+- output scores to excel sheet to extract stats
+- save score
+    - button that stops current run and saves score
+- button on main menu that shows highscore and previous runs
