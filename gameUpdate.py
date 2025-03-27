@@ -71,6 +71,7 @@ def set_dice():
 # - play will contain game loop and on loss, will go back to main menu
 
 def write2File(score):
+    open('scoreFile.txt', 'a').close()
     try: # check if scoreFile.txt contains scores, if not, create first scores
         with open('scoreFile.txt', 'r') as f:
             first_line = f.readline().strip()
