@@ -1,5 +1,5 @@
 #make a function that sets the default values instead of writing them twice
-import pygame, random, sys
+import pygame, random, sys, re
 
 # Initialize Pygame
 pygame.init()
@@ -69,6 +69,44 @@ def set_dice():
 # create main menu and game functions
 # - main menu will have a Play button and a Quit Button
 # - play will contain game loop and on loss, will go back to main menu
+
+def write2File(score):
+    try: # check if scoreFile.txt contains scores, if not, create first scores
+        with open('scoreFile.txt', 'r') as f:
+            first_line = f.readline().strip()
+            if not first_line:  # File is empty
+                highScore = 0
+            else:
+                highScore = readHighScore()
+    except FileNotFoundError:
+        highScore = 0  
+
+    if score > highScore:
+        with open('scoreFile.txt', 'r+') as r:
+            lines = r.readlines()
+            if lines:
+                lines[0] = f'Highscore: {score} points\n'
+                r.seek(0)
+                r.writelines(lines)
+                r.truncate()
+            else:
+                r.write(f'Highscore: {score} points\n')
+
+    with open('scoreFile.txt', 'a') as f:
+        f.write(f'\nRun score: {score} points\n')
+
+def readHighScore():
+    try:
+        with open('scoreFile.txt', 'r') as file:
+            highScore = file.readline()
+            highScoreMatch = re.search(r'\d+', highScore)
+            if highScoreMatch:
+                highScore = int(highScoreMatch.group())
+            else:
+                highScore = 0
+            return highScore
+    except FileNotFoundError:
+        return 0
 
 def main_menu():
     running = True
@@ -142,7 +180,8 @@ def play():
 
 def game_over(stage, score):
     running = True
-    
+    write2File(score)
+
     while running:
         screen.fill(GREEN)
         
